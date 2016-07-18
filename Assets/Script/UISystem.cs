@@ -24,6 +24,8 @@ public class UISystem : MonoBehaviour {
     public Text     m_ScoreLabel        = null;
     public void ShowSummativePanel(float _fScore)
     {
+        CancelInvoke("DisableSummativePanel");
+        Invoke("DisableSummativePanel" , 3f);
         m_SummativeAnimator.SetTrigger("TriggerSwitch");
         SetSummativeValue(_fScore);
 
@@ -32,6 +34,11 @@ public class UISystem : MonoBehaviour {
     private void SetSummativeValue(float _fScore)
     {
         m_ScoreLabel.text = "Time To Live  : " + _fScore.ToString();   
+    }
+
+    private void DisableSummativePanel()
+    {
+        m_SummativeAnimator.SetTrigger("TriggerSwitch");
     }
 	
 }

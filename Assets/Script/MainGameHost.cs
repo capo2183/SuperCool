@@ -68,6 +68,12 @@ public class MainGameHost : MonoBehaviour {
     {
         m_TimeCtrl.SetEnabled(_isEnabled);
     }
+
+    public void TimeCtrlResetTimer()
+    {
+        m_TimeCtrl.ResetTimer();
+    }
+
     public float GetTime
     {
         get
