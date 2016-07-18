@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Runtime.InteropServices;
+
 [System.Serializable]
 public class BulletManager :GameSystem 
 {
@@ -38,11 +40,9 @@ public class BulletManager :GameSystem
 
                 // Set Random Type
                 int type_idx = Random.Range(0, bullet_prefab_obj.Length);
-                GameObject bullet = MonoBehaviour.Instantiate(bullet_prefab_obj[type_idx], new Vector3(pos_x, 7.0f + pos_y, 0.0f), Quaternion.identity) as GameObject;
+                GameObject bullet = PathologicalGames.PoolManager.Pools["Bullet"].Spawn(bullet_prefab_obj[type_idx].transform).gameObject;
+                bullet.transform.position = new Vector3(pos_x, 7.0f + pos_y, 0.0f);
                 bullet.GetComponent<Bullet>().SetLinerDrag( MainGameHost.MonoRef.GetTimeScale );
-                // Set speed
-//                float rSpeed = speed + Random.Range(-speed_bias, speed_bias);
-//                bullet.GetComponent<Rigidbody2D>().AddForce(new Vector2(0.0f, -rSpeed));
             }
             tTime = 0;
         }
