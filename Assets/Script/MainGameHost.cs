@@ -18,6 +18,7 @@ public class MainGameHost : MonoBehaviour {
     #region MonoBehaviour 
     private void Awake()
     {
+        Application.targetFrameRate = 60;
         m_MonoRef = this;
 
     }
