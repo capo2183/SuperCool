@@ -63,6 +63,9 @@ public class InputControl:GameSystem
         #endif
 
         Vector3 _MoveV3 =  new Vector3( m_fHorizontal * Time.deltaTime, 0 ,0 );
+        #if UNITY_ANDROID
+        _MoveV3 *= 4;
+        #endif
         if (m_fHorizontal != 0)
             MainGameHost.MonoRef.InputCtrlOnMove(_MoveV3);
 
