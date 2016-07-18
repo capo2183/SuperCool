@@ -35,8 +35,13 @@ public class PlayerControl : MonoBehaviour {
 
     private void GetDamage()
     {
-
         ShowSummativePanel();
+        ResetTimer();
+    }
+
+    private void ResetTimer()
+    {
+        MainGameHost.MonoRef.TimeCtrlResetTimer();
     }
 
     private void ShowSummativePanel()

@@ -38,6 +38,11 @@ public class TimerControl : GameSystem {
 //        m_TimeLabel.text = m_Time.ToString("00.00");
     }        
 
+    public void ResetTimer()
+    {
+        m_Time = 0f;
+    }
+
     public float fTime
     {
         get
