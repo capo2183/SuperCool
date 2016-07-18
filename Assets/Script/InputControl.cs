@@ -1,28 +1,26 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class InputControl : MonoBehaviour {
+public class InputControl:GameSystem 
+{
+    public delegate void Move(Vector3 _Vector3);
+    public Move OnMove;
 
     private float m_fHorizontal             = 0;
-
-    private PlayerControl m_Player          = null;
-    private BulletManager m_BulletManager   = null;
-    private TimeScaleCtrl m_TimeScaleCtrl   = null;
-    private TimerControl  m_TimeControl     = null;
-
     private int m_iScreenW = 0;
-
     private bool m_isInputStart = false;
+    private bool m_LastState = false;
+    public InputControl()
+    {
 
-	void Start () {
-        m_iScreenW = Screen.width;
-        m_Player = PlayerControl.Ctrl;
-        m_BulletManager = BulletManager.Manager;
-        m_TimeScaleCtrl = TimeScaleCtrl.Ctrl;
-        m_TimeControl = TimerControl.Ctrl;
+    }
+
+    public override void Start () {
+        m_iScreenW = Screen.width;       
+//        m_TimeControl = TimerControl.Ctrl;
 	}
 	
-	void Update () 
+    public override void Update () 
     {
         m_fHorizontal = Input.GetAxis("Horizontal");
         #if UNITY_ANDROID
@@ -64,23 +62,28 @@ public class InputControl : MonoBehaviour {
         #endif
 
         Vector3 _MoveV3 =  new Vector3( m_fHorizontal * Time.deltaTime, 0 ,0 );
-        m_Player.Move( _MoveV3 );
+        MainGameHost.MonoRef.InputCtrlOnMove(_MoveV3);
 
         if (Input.anyKey)
         {
             //Start bullet manager
             if (!m_isInputStart)
             {
-                m_BulletManager.SetEnable(true);
-                m_TimeControl.SetEnabled(true);
+                MainGameHost.MonoRef.BulletManagerSetEnabled(true);
+                MainGameHost.MonoRef.TimeCtrlSetEnabled(true);
             }
-            
-            m_TimeScaleCtrl.SetSlowMotion(false);
-//            m_TimeScaleCtrl.SetTimeScaleByDelta( m_fHorizontal );
+            if (!m_LastState)
+            {
+                m_LastState = true;
+                MainGameHost.MonoRef.TimeScaleCtrlSetSlowMotion(false);
+                MainGameHost.MonoRef.BulletManagerSetLinerDrag();
+            }
         }
-        else
+        else if (m_LastState)
         {
-            m_TimeScaleCtrl.SetSlowMotion(true);
+            m_LastState = false;
+            MainGameHost.MonoRef.TimeScaleCtrlSetSlowMotion(true);
+            MainGameHost.MonoRef.BulletManagerSetLinerDrag();
         }
 	}
 }

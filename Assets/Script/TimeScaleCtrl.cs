@@ -3,19 +3,15 @@ using System.Collections;
 
 public class TimeScaleCtrl
 {
-    private static TimeScaleCtrl m_Ctrl = new TimeScaleCtrl();
-    public  static TimeScaleCtrl Ctrl{ get{ return m_Ctrl;} }
-
-    private float m_TimeScaleValue = 0;
+    private float m_TimeScaleValue = 1;
     public float TimeScaleValue{ get{return m_TimeScaleValue;} }
 
 
     public void SetSlowMotion(bool _isSlow)
     {
-        float _fTimeScale = (_isSlow)? 0.1f : 1f;
+        float _fTimeScale = (_isSlow)? 10f : 1f;
 
-        m_TimeScaleValue = _fTimeScale;
-        Time.timeScale = _fTimeScale;
+        m_TimeScaleValue = _fTimeScale;        
     }
 
     public void SetTimeScaleByDelta(float _Delta)

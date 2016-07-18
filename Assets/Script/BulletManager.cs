@@ -1,11 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
-
-public class BulletManager : MonoBehaviour 
+[System.Serializable]
+public class BulletManager :GameSystem 
 {
-    private static BulletManager m_Manager = null;
-    public  static BulletManager Manager{ get{ return m_Manager; } }
-
     public float frequency;
     public int amount;
     public float speed;
@@ -13,29 +10,24 @@ public class BulletManager : MonoBehaviour
 
     public GameObject[] bullet_prefab_obj;
 
-    private bool m_isEnable = false;
+//    private bool m_isEnable = false;
     private float tTime;
 
 	// Use this for initialization
-    void Awake()
+    public override void  Awake()
     {
-        m_Manager = this;
+//        m_Manager = this;
     }
 
-	void Start () {
+    public override void  Start () {
 	
 	}
-	
-    public void SetEnable(bool isEnable)
-    {
-        m_isEnable = isEnable;
-    }
 
 	// Update is called once per frame
-	void Update () 
+    public override void Update () 
     {
-        if (!m_isEnable) return;
-        tTime += Time.deltaTime;
+        if (!m_isEnabled) return;
+        tTime += Time.deltaTime / MainGameHost.MonoRef.GetTimeScale;
         if(tTime > frequency)
         {
             for(int i=0; i<amount; i++)
@@ -46,13 +38,23 @@ public class BulletManager : MonoBehaviour
 
                 // Set Random Type
                 int type_idx = Random.Range(0, bullet_prefab_obj.Length);
-                GameObject bullet = Instantiate(bullet_prefab_obj[type_idx], new Vector3(pos_x, 7.0f + pos_y, 0.0f), Quaternion.identity) as GameObject;
-
+                GameObject bullet = MonoBehaviour.Instantiate(bullet_prefab_obj[type_idx], new Vector3(pos_x, 7.0f + pos_y, 0.0f), Quaternion.identity) as GameObject;
+                bullet.GetComponent<Bullet>().SetLinerDrag( MainGameHost.MonoRef.GetTimeScale );
                 // Set speed
-                float rSpeed = speed + Random.Range(-speed_bias, speed_bias);
-                bullet.GetComponent<Rigidbody2D>().AddForce(new Vector2(0.0f, -rSpeed));
+//                float rSpeed = speed + Random.Range(-speed_bias, speed_bias);
+//                bullet.GetComponent<Rigidbody2D>().AddForce(new Vector2(0.0f, -rSpeed));
             }
             tTime = 0;
         }
 	}
+
+    public void SetLinerDrag(float _fLonerFrag)
+    {
+        GameObject[] _Bullets = GameObject.FindGameObjectsWithTag("Bullet");
+        for(int i = 0 ; i < _Bullets.Length ; i ++)
+        {
+            Bullet _b =  _Bullets[i].GetComponent<Bullet>();
+            _b.SetLinerDrag(_fLonerFrag);
+        }
+    }
 }

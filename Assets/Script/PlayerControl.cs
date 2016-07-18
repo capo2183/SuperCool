@@ -16,7 +16,7 @@ public class PlayerControl : MonoBehaviour {
 
     public void Move( Vector3 _V3 )
     {
-        _V3.x = _V3.x * m_FixSpeed;
+        _V3.x = _V3.x * m_FixSpeed / MainGameHost.MonoRef.GetTimeScale;
         transform.Translate( _V3 );
 
         int _iScaleX = (_V3.x > 0) ? -1 : 1;
@@ -31,9 +31,7 @@ public class PlayerControl : MonoBehaviour {
             if(!is_safe)
                 GetDamage();
         }
-    }
-
-
+    }        
 
     private void GetDamage()
     {

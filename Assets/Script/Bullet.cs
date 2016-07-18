@@ -2,18 +2,25 @@
 using System.Collections;
 
 public class Bullet : MonoBehaviour {
-    public bool is_safe;
-      
+    public  bool            is_safe             = false;
+    private Rigidbody2D     m_Rigidbody2D       = null;
+    private SpriteRenderer  m_SpriteRenderer    = null;
+
+    void Awake()
+    {
+        m_SpriteRenderer    = this.GetComponent<SpriteRenderer>();
+        m_Rigidbody2D       = this.GetComponent<Rigidbody2D>();
+    }
 	// Use this for initialization
 	void Start ()
     {
-        is_safe = false;
-        this.GetComponent<SpriteRenderer>().color = new Color(1.0f, 0.0f, 0.0f, 1.0f);
+        this.Init();
     }
-	
-	// Update is called once per frame
-	void Update ()
+
+    private void Init()
     {
+        is_safe = false;
+        m_SpriteRenderer.color = new Color(1.0f, 0.0f, 0.0f, 1.0f);
     }
 
     void DestoryObj()
@@ -39,5 +46,10 @@ public class Bullet : MonoBehaviour {
                 this.GetComponent<Rigidbody2D>().mass = 0.1f;
             }
         }
+    }
+
+    public void SetLinerDrag(float _Value)
+    {
+        m_Rigidbody2D.drag = _Value;
     }
 }
