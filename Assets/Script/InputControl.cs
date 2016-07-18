@@ -23,6 +23,7 @@ public class InputControl:GameSystem
     public override void Update () 
     {
         m_fHorizontal = Input.GetAxis("Horizontal");
+
         #if UNITY_ANDROID
         if (Input.touchCount > 0)
         {
@@ -62,7 +63,8 @@ public class InputControl:GameSystem
         #endif
 
         Vector3 _MoveV3 =  new Vector3( m_fHorizontal * Time.deltaTime, 0 ,0 );
-        MainGameHost.MonoRef.InputCtrlOnMove(_MoveV3);
+        if (m_fHorizontal != 0)
+            MainGameHost.MonoRef.InputCtrlOnMove(_MoveV3);
 
         if (Input.anyKey)
         {

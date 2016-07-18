@@ -41,8 +41,8 @@ public class BulletManager :GameSystem
                 GameObject bullet = MonoBehaviour.Instantiate(bullet_prefab_obj[type_idx], new Vector3(pos_x, 7.0f + pos_y, 0.0f), Quaternion.identity) as GameObject;
                 bullet.GetComponent<Bullet>().SetLinerDrag( MainGameHost.MonoRef.GetTimeScale );
                 // Set speed
-//                float rSpeed = speed + Random.Range(-speed_bias, speed_bias);
-//                bullet.GetComponent<Rigidbody2D>().AddForce(new Vector2(0.0f, -rSpeed));
+                float rSpeed = speed + Random.Range(-speed_bias, speed_bias);
+                bullet.GetComponent<Rigidbody2D>().AddForce(new Vector2(0.0f, -rSpeed));
             }
             tTime = 0;
         }
