@@ -9,7 +9,7 @@ public class TimeScaleCtrl
 
     public void SetSlowMotion(bool _isSlow)
     {
-        float _fTimeScale = (_isSlow)? 10f : 1f;
+        float _fTimeScale = (_isSlow)? 20f : 1f;
 
         m_TimeScaleValue = _fTimeScale;        
     }
