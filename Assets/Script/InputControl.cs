@@ -78,14 +78,14 @@ public class InputControl:GameSystem
             {
                 m_LastState = true;
                 MainGameHost.MonoRef.TimeScaleCtrlSetSlowMotion(false);
-                MainGameHost.MonoRef.BulletManagerSetLinerDrag();
+                MainGameHost.MonoRef.BulletManagerSetDeltaTime();
             }
         }
         else if (m_LastState)
         {
             m_LastState = false;
             MainGameHost.MonoRef.TimeScaleCtrlSetSlowMotion(true);
-            MainGameHost.MonoRef.BulletManagerSetLinerDrag();
+            MainGameHost.MonoRef.BulletManagerSetDeltaTime();
         }
 	}
 }

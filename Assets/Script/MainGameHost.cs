@@ -100,10 +100,10 @@ public class MainGameHost : MonoBehaviour {
     {
         m_BulletManager.SetEnabled(_isEnabled);
     }
-    public void BulletManagerSetLinerDrag()
+    public void BulletManagerSetDeltaTime()
     {
         float _fLinerDrag = m_TimeScaleCtrl.TimeScaleValue;
-        m_BulletManager.SetLinerDrag( _fLinerDrag );
+        m_BulletManager.SetDeltaTime( _fLinerDrag );
     }
     #endregion
 

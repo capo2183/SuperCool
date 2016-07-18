@@ -41,20 +41,28 @@ public class BulletManager :GameSystem
                 // Set Random Type
                 int type_idx = Random.Range(0, bullet_prefab_obj.Length);
                 GameObject bullet = PathologicalGames.PoolManager.Pools["Bullet"].Spawn(bullet_prefab_obj[type_idx].transform).gameObject;
+                bullet.SetActive(true);
                 bullet.transform.position = new Vector3(pos_x, 7.0f + pos_y, 0.0f);
-                bullet.GetComponent<Bullet>().SetLinerDrag( MainGameHost.MonoRef.GetTimeScale );
+                bullet.GetComponent<Bullet>().SetDeltaTime( MainGameHost.MonoRef.GetTimeScale );
             }
             tTime = 0;
         }
 	}
 
-    public void SetLinerDrag(float _fLonerFrag)
+    public void SetDeltaTime(float _fLonerFrag)
     {
-        GameObject[] _Bullets = GameObject.FindGameObjectsWithTag("Bullet");
-        for(int i = 0 ; i < _Bullets.Length ; i ++)
+        try
         {
-            Bullet _b =  _Bullets[i].GetComponent<Bullet>();
-            _b.SetLinerDrag(_fLonerFrag);
+            GameObject[] _Bullets = GameObject.FindGameObjectsWithTag("Bullet");
+            for (int i = 0; i < _Bullets.Length; i++)
+            {
+                Bullet _b = _Bullets[i].GetComponent<Bullet>();
+                _b.SetDeltaTime(_fLonerFrag);
+            }
+        }
+        catch
+        {
+            Debug.LogError("Can not set bullet delta time.");
         }
     }
 }
