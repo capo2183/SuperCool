@@ -24,7 +24,7 @@ public class InputControl:GameSystem
     {
         m_fHorizontal = Input.GetAxis("Horizontal");
 
-        #if UNITY_ANDROID
+        #if UNITY_ANDROID && !UNITY_EDITOR
         if (Input.touchCount > 0)
         {
             bool _isLeft = (Input.GetTouch(0).position.x > m_iScreenW / 2 ) ? false : true;                       
@@ -63,7 +63,7 @@ public class InputControl:GameSystem
         #endif
 
         Vector3 _MoveV3 =  new Vector3( m_fHorizontal * Time.deltaTime, 0 ,0 );
-        #if UNITY_ANDROID
+        #if UNITY_ANDROID && !UNITY_EDITOR
         _MoveV3 *= 4;
         #endif
         if (m_fHorizontal != 0)
