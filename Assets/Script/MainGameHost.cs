@@ -68,6 +68,13 @@ public class MainGameHost : MonoBehaviour {
     {
         m_TimeCtrl.SetEnabled(_isEnabled);
     }
+    public float GetTime
+    {
+        get
+        {
+            return m_TimeCtrl.fTime;
+        }
+    }
     #endregion
 
     #region TimeScale Ctrl
@@ -105,8 +112,16 @@ public class MainGameHost : MonoBehaviour {
     {
         m_UISystem.SetTimeLabelText(_sText);
     }
+    public void ShowSummativePanel(float _fScore)
+    {
+        m_UISystem.ShowSummativePanel(_fScore);
+    }
     #endregion
    
+    public void ResloadLevel()
+    {
+        Application.LoadLevel(0);   
+    }
 }
 
 

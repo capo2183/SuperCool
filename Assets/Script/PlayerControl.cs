@@ -35,6 +35,13 @@ public class PlayerControl : MonoBehaviour {
 
     private void GetDamage()
     {
-        Application.LoadLevel(0);
+
+        ShowSummativePanel();
+    }
+
+    private void ShowSummativePanel()
+    {
+        float _fScore = MainGameHost.MonoRef.GetTime;
+        MainGameHost.MonoRef.ShowSummativePanel(_fScore);
     }
 }

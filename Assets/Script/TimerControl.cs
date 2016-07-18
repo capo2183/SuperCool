@@ -37,4 +37,12 @@ public class TimerControl : GameSystem {
         MainGameHost.MonoRef.UISystemSetTimeLabel( m_Time.ToString("00.00") );
 //        m_TimeLabel.text = m_Time.ToString("00.00");
     }        
+
+    public float fTime
+    {
+        get
+        {
+            return m_Time;
+        }
+    }
 }
