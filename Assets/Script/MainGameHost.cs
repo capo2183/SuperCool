@@ -30,9 +30,9 @@ public class MainGameHost : MonoBehaviour {
     // Update is called once per frame
     void Update () 
     {
+        m_BulletManager.Update();
         m_InputCtrl.Update();
         m_TimeCtrl.Update();
-        m_BulletManager.Update();
     }
     private void OnDestroy()
     {
@@ -49,6 +49,7 @@ public class MainGameHost : MonoBehaviour {
         m_InputCtrl = new InputControl();
         m_TimeScaleCtrl = new TimeScaleCtrl();
         m_TimeCtrl = new TimerControl();
+         
     }
 
     #region Input Ctrl

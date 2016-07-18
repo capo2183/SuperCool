@@ -5,7 +5,7 @@ public class PlayerControl : MonoBehaviour {
 
     private static PlayerControl m_Ctrl;
     public  static PlayerControl Ctrl { get{ return m_Ctrl; } }
-    public float m_FixSpeed = 5f;
+    public float m_FixSpeed = 20f;
 //    public Transform m_PlayerTf;
 
     private void Awake()
@@ -16,7 +16,7 @@ public class PlayerControl : MonoBehaviour {
 
     public void Move( Vector3 _V3 )
     {
-        _V3.x = _V3.x * m_FixSpeed / MainGameHost.MonoRef.GetTimeScale;
+        _V3.x = _V3.x * m_FixSpeed * MainGameHost.MonoRef.GetTimeScale;
         transform.Translate( _V3 );
 
         int _iScaleX = (_V3.x > 0) ? -1 : 1;
