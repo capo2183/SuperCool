@@ -77,10 +77,16 @@
   <ItemGroup>
     <Compile Include="Assets\Script\Bullet.cs" />
     <Compile Include="Assets\Script\BulletManager.cs" />
+    <Compile Include="Assets\Script\GameSystemBase.cs" />
     <Compile Include="Assets\Script\InputControl.cs" />
+    <Compile Include="Assets\Script\MainGameHost.cs" />
     <Compile Include="Assets\Script\PlayerControl.cs" />
+    <Compile Include="Assets\Script\PoolManager\PoolManager.cs" />
+    <Compile Include="Assets\Script\PoolManager\PreRuntimePoolItem.cs" />
+    <Compile Include="Assets\Script\PoolManager\SpawnPool.cs" />
     <Compile Include="Assets\Script\TimeScaleCtrl.cs" />
     <Compile Include="Assets\Script\TimerControl.cs" />
+    <Compile Include="Assets\Script\UISystem.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Sprites\animations.txt" />

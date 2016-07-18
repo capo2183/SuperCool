@@ -29,7 +29,7 @@ public class BulletManager :GameSystem
     public override void Update () 
     {
         if (!m_isEnabled) return;
-        tTime += Time.deltaTime / MainGameHost.MonoRef.GetTimeScale;
+        tTime += Time.deltaTime * MainGameHost.MonoRef.GetTimeScale;
         if(tTime > frequency)
         {
             for(int i=0; i<amount; i++)
