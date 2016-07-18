@@ -33,7 +33,7 @@ public class TimerControl : GameSystem {
         if (!m_isEnabled) return;
         m_fSpacingTime = Time.deltaTime;
 
-        m_Time += Time.deltaTime;        
+        m_Time += Time.deltaTime / MainGameHost.MonoRef.GetTimeScale;        
         MainGameHost.MonoRef.UISystemSetTimeLabel( m_Time.ToString("00.00") );
 //        m_TimeLabel.text = m_Time.ToString("00.00");
     }        
